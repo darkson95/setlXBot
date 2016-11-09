@@ -6,7 +6,7 @@ var download = require('download');
 var exec = require('child_process').exec;
 var setlxPath = "./setlx/setlX";
 
-bot.login("enter here your discord bot token");
+bot.login('enter your discord bot token here');
 
 bot.on('ready', () => {
 	var game = new Discord.Game({name : "!help", type : 1});
@@ -27,10 +27,12 @@ bot.on("message", msg => {
 	if (!msg.content.startsWith(prefix)) return;
 
 	if(msg.content.startsWith(prefix + "help")){
-		msg.reply('\n\n!help - print all commands\n!setlx - executes stlx-file in message-attachment and prints result\n!setlx code - executes stlx-file in message-attachment and prints sourcecode and result\n');    
+		msg.reply('\n\n!help - print all commands\n!setlx - executes stlx-file in message-attachment and prints result\n!setlx code - executes stlx-file in message-attachment and prints sourcecode and result\n\n');
 	}
 	else if(cmd.startsWith(prefix + "setlx")){
 		var att = msg.attachments.first();
+		var func = args[0] || "";
+
 		if(att){
 			var fileName = att.filename;
 			var fileUrl = att.url;
@@ -43,7 +45,7 @@ bot.on("message", msg => {
 				download(fileUrl, './tmp/').then(() => {
 				    var cmd = setlxPath + " " + fileSavePath;
 
-    				if(args[0].startsWith("code")){
+				    if(func.startsWith("code")){
     					fs.readFile(fileSavePath, 'utf8', function (err, data) {
 						  	if (err) throw err;
 
@@ -51,21 +53,24 @@ bot.on("message", msg => {
 						});
 					}
 
-				    exec(cmd , (error, stdout, stderr) => {
-					  	if (error) {
-					    	msg.reply("Error (exec): " + error);
-					    	return;
-					  	}
-					  	console.log(stdout);
+				    msg.channel.sendFile("./pacman.gif", '', 'Executing your setlX File...')
+				    	.then(message => {
+				    		exec(cmd , (error, stdout, stderr) => {
+							  	if (error) {
+							    	msg.reply("Error (exec): " + error);
+							    	return;
+							  	}
 
-					  	msg.channel.sendCode('', fileName + ' Result:\n\n' + stdout, {});
+							  	msg.channel.sendCode('', fileName + ' Result:\n\n' + stdout, {});
+							  	message.delete();
 
-					  	setTimeout(function(){ 
-					  		fs.unlink(fileSavePath, function(err){
-			        			if (err) throw err;
-				          	});
-					  	}, 5000);
-					});
+							  	setTimeout(function(){ 
+							  		fs.unlink(fileSavePath, function(err){
+					        			if (err) throw err;
+						          	});
+							  	}, 3000);
+							});
+				    	});
 				});
 			}
 			else {
