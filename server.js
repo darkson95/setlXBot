@@ -6,7 +6,7 @@ var download = require('download');
 var exec = require('child_process').exec;
 var setlxPath = "./setlx/setlX";
 
-bot.login('enter your discord bot token here');
+bot.login(process.env.BOTTOKEN);
 
 bot.on('ready', () => {
 	var game = new Discord.Game({name : "!help", type : 1});
@@ -61,7 +61,12 @@ bot.on("message", msg => {
 							    	return;
 							  	}
 
-							  	msg.channel.sendCode('', fileName + ' Result:\n\n' + stdout, {});
+							  	var output = fileName + ' Result:\n\n' + stdout;
+							  	if(stderr.length > 3){
+							  		output = output.concat('\n\nstderr:\n' + stderr);
+							  	}
+
+							  	msg.channel.sendCode('', output, {});
 							  	message.delete();
 
 							  	setTimeout(function(){ 
