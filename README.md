@@ -7,3 +7,6 @@ Commands:
  - !help - print all commands
  - !setlx - executes stlx-file in message-attachment and prints result
  - !setlx code - executes stlx-file in message-attachment and prints sourcecode and result
+
+
+You may edit the var setlxPath in server.js and/or the var setlXJarDirectory/setlXlibraryPath in setlx/setlX
