@@ -4,9 +4,9 @@ var stringArgv = require('string-argv');
 var fs = require('fs');
 var download = require('download');
 var exec = require('child_process').exec;
-var setlxPath = "/mnt/ext/setlXBot/setlx/setlX";
+var setlxPath = "./setlx/setlX";
 
-bot.login("enter here your Discord Bot Token");
+bot.login("enter here your discord bot token");
 
 bot.on('ready', () => {
 	var game = new Discord.Game({name : "!help", type : 1});
@@ -15,10 +15,6 @@ bot.on('ready', () => {
 	bot.user.setPresence(pres);
 
 	console.log('I am ready!');
-});
-
-bot.on('channelUpdate', (oldChannel, newChannel) => {
-  console.log("channelUpdate");
 });
 
 bot.on("message", msg => {
@@ -31,7 +27,7 @@ bot.on("message", msg => {
 	if (!msg.content.startsWith(prefix)) return;
 
 	if(msg.content.startsWith(prefix + "help")){
-		msg.reply('\n\n**!help** - Zeige alle Befehle\n**!setlx** - Führt die seltX-Datei im Anhang aus und zeigt das Ergebnis an\n**!setlx code** - Führt die seltX-Datei im Anhang aus und zeigt den Quellcode und das Ergebnis an\n');    
+		msg.reply('\n\n!help - print all commands\n!setlx - executes stlx-file in message-attachment and prints result\n!setlx code - executes stlx-file in message-attachment and prints sourcecode and result\n');    
 	}
 	else if(cmd.startsWith(prefix + "setlx")){
 		var att = msg.attachments.first();
@@ -62,7 +58,7 @@ bot.on("message", msg => {
 					  	}
 					  	console.log(stdout);
 
-					  	msg.channel.sendCode('', fileName + ' Ausgabe:\n\n' + stdout, {});
+					  	msg.channel.sendCode('', fileName + ' Result:\n\n' + stdout, {});
 
 					  	setTimeout(function(){ 
 					  		fs.unlink(fileSavePath, function(err){
@@ -73,11 +69,11 @@ bot.on("message", msg => {
 				});
 			}
 			else {
-				msg.reply("Error: Anhang ist keine .stlx Datei!");
+				msg.reply("Error: attachment is not a .stlx file");
 			}
 		}
 		else {
-			msg.reply("Error: Kein Anhang");
+			msg.reply("Error: no attachment");
 		}
 	}
 });
