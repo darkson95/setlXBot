@@ -53,7 +53,7 @@ bot.on("message", msg => {
 						});
 					}
 
-				    msg.channel.sendFile("./pacman.gif", '', 'Executing your setlX File...')
+				    msg.channel.sendMessage('Executing your setlX File...')
 				    	.then(message => {
 				    		exec(cmd , (error, stdout, stderr) => {
 							  	if (error) {
