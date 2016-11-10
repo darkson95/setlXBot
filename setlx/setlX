@@ -6,10 +6,10 @@
 #
 
 # insert path to the folder where you copied the jar files here
-setlXJarDirectory="/mnt/ext/Discocks/setlx"
+setlXJarDirectory="/home/user/setlXBot/setlx"
 
 # insert full path to library location here
-setlXlibraryPath="/mnt/ext/Discocks/setlx/setlXlibrary/"
+setlXlibraryPath="/home/user/setlXBot/setlx/setlXlibrary/"
 
 ############################## additional options ##############################
 javaParameters=""
@@ -38,7 +38,7 @@ if [ -z "$SETLX_LIBRARY_PATH" ]
     export SETLX_LIBRARY_PATH="$setlXlibraryPath"
 fi
 
-java_call="java"
+java_call="java -Djava.security.manager -Djava.security.policy=jail.policy --runtimeDebugging"
 
 if [ $(which rlwrap > /dev/null 2>&1; echo $?) -eq 0 ]
   then

@@ -1,0 +1,7 @@
+grant codebase "file:setlX.jar" {
+    permission java.lang.RuntimePermission "stopThread";
+    permission java.util.PropertyPermission "sun.arch.data.model", "read";
+    permission java.lang.RuntimePermission "getenv.SETLX_LIBRARY_PATH";
+    permission java.io.FilePermission "changelog.txt", "read";
+    permission java.io.FilePermission "${/}tmp${/}setlx${/}-", "read";
+};
