@@ -36,7 +36,7 @@ bot.on("message", msg => {
 		if(att){
 			var fileName = att.filename;
 			var fileUrl = att.url;
-			var fileSaveDir = '/tmp/setlx';
+			var fileSaveDir = '/tmp/setlx/';
 			var fileSavePath = fileSaveDir + fileName;
 			var fileExt = /(?:\.([^.]+))?$/.exec(fileName)[1];
 

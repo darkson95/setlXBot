@@ -38,7 +38,7 @@ if [ -z "$SETLX_LIBRARY_PATH" ]
     export SETLX_LIBRARY_PATH="$setlXlibraryPath"
 fi
 
-java_call="java -Djava.security.manager -Djava.security.policy=jail.policy --runtimeDebugging"
+java_call="java"
 
 if [ $(which rlwrap > /dev/null 2>&1; echo $?) -eq 0 ]
   then
