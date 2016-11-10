@@ -54,7 +54,7 @@ bot.on("message", msg => {
 				    msg.channel.sendMessage('Executing your setlX File...')
 				    	.then(message => {
 						    var cmd = setlxPath + fileSavePath;
-				    		exec(cmd, {timeout : 60}, (error, stdout, stderr) => {
+				    		exec(cmd, (error, stdout, stderr) => {
 							  	if (error) {
 							    	msg.reply("Error (exec): " + error);
 							    	return;
