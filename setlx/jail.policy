@@ -1,4 +1,4 @@
-grant codebase "file:setlX.jar" {
+grant codebase "file:/home/user/setlXBot/setlx/setlX.jar" {
     permission java.lang.RuntimePermission "stopThread";
     permission java.util.PropertyPermission "sun.arch.data.model", "read";
     permission java.lang.RuntimePermission "getenv.SETLX_LIBRARY_PATH";

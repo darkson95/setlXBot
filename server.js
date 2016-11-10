@@ -4,7 +4,7 @@ var stringArgv = require('string-argv');
 var fs = require('fs');
 var download = require('download');
 var exec = require('child_process').exec;
-var setlxPath = "./setlx/setlX";
+var setlxPath = "./setlx/setlX --runtimeDebugging ";
 
 bot.login(process.env.BOTTOKEN);
 
@@ -36,14 +36,12 @@ bot.on("message", msg => {
 		if(att){
 			var fileName = att.filename;
 			var fileUrl = att.url;
-			var fileSaveDir = './tmp/';
+			var fileSaveDir = '/tmp/setlx';
 			var fileSavePath = fileSaveDir + fileName;
-
 			var fileExt = /(?:\.([^.]+))?$/.exec(fileName)[1];
 
 			if(fileExt == "stlx"){
-				download(fileUrl, './tmp/').then(() => {
-				    var cmd = setlxPath + " " + fileSavePath;
+				download(fileUrl, fileSaveDir).then(() => {
 
 				    if(func.startsWith("code")){
     					fs.readFile(fileSavePath, 'utf8', function (err, data) {
@@ -55,7 +53,8 @@ bot.on("message", msg => {
 
 				    msg.channel.sendMessage('Executing your setlX File...')
 				    	.then(message => {
-				    		exec(cmd , (error, stdout, stderr) => {
+						    var cmd = setlxPath + fileSavePath;
+				    		exec(cmd, {timeout : 60}, (error, stdout, stderr) => {
 							  	if (error) {
 							    	msg.reply("Error (exec): " + error);
 							    	return;
