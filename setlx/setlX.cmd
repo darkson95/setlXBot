@@ -7,10 +7,10 @@ REM
 REM
 
 REM insert path to the folder where you copied the jar files here
-set setlXJarDirectory=X:\Discocks\seltx
+set setlXJarDirectory=X:\setlXBot\seltx
 
 REM insert full path to library location here
-set SETLX_LIBRARY_PATH=X:\Discocks\seltx\setlXlibrary\
+set SETLX_LIBRARY_PATH=X:\setlXBot\seltx\setlXlibrary\
 
 REM ########################## additional options ##############################
 set javaParameters=

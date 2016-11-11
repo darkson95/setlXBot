@@ -27,7 +27,7 @@ bot.on("message", msg => {
 	if (!msg.content.startsWith(prefix)) return;
 
 	if(msg.content.startsWith(prefix + "help")){
-		msg.reply('\n\n!help - print all commands\n!setlx - executes stlx-file in message-attachment and prints result\n!setlx code - executes stlx-file in message-attachment and prints sourcecode and result\n\n');
+		msg.reply('\n\n!help - print all commands\n!setlx - executes stlx-file in message-attachment and prints result\n!setlx code - executes stlx-file in message-attachment and prints sourcecode and result\n!version - prints setlX version\n\n');
 	}
 	else if(cmd.startsWith(prefix + "setlx")){
 		var att = msg.attachments.first();
@@ -53,8 +53,8 @@ bot.on("message", msg => {
 
 				    msg.channel.sendMessage('Executing your setlX File...')
 				    	.then(message => {
-						    var cmd = setlxPath + fileSavePath;
-				    		exec(cmd, (error, stdout, stderr) => {
+						    var command = setlxPath + fileSavePath;
+				    		exec(command, (error, stdout, stderr) => {
 							  	if (error) {
 							    	msg.reply("Error (exec): " + error);
 							    	return;
@@ -84,5 +84,16 @@ bot.on("message", msg => {
 		else {
 			msg.reply("Error: no attachment");
 		}
+	}
+	else if(cmd.startsWith(prefix + "version")){
+		var command = setlxPath + ' --version';
+		exec(command, (error, stdout, stderr) => {
+		  	if (error) {
+		    	msg.reply("Error (exec): " + error);
+		    	return;
+		  	}
+
+		  	msg.channel.sendCode('', 'setlX --version:\n' + stdout, {});
+		});
 	}
 });
