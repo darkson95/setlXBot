@@ -9,7 +9,7 @@ var setlxPath = "./setlx/setlX --runtimeDebugging ";
 bot.login(process.env.BOTTOKEN);
 
 bot.on('ready', () => {
-	var game = new Discord.Game({name : "!help", type : 1});
+	var game = new Discord.Game({name : "!info", type : 1});
 	var pres = new Discord.Presence({status : "online", game : game});
 
 	bot.user.setPresence(pres);
@@ -26,8 +26,12 @@ bot.on("message", msg => {
 	if (msg.author.bot) return;
 	if (!msg.content.startsWith(prefix)) return;
 
-	if(msg.content.startsWith(prefix + "help")){
-		msg.reply('\n\n!help - print all commands\n!setlx - executes stlx-file in message-attachment and prints result\n!setlx code - executes stlx-file in message-attachment and prints sourcecode and result\n!version - prints setlX version\n\n');
+	if(msg.content.startsWith(prefix + "commands")){
+		msg.reply('\n\n!commands - print all commands\n!info - prints bot informations\n!setlx - executes stlx-file in message-attachment and prints result\n!setlx code - executes stlx-file in message-attachment and prints sourcecode and result\n!version - prints setlX version\n\n');
+	}
+	else if(cmd.startsWith(prefix + "info")){
+		var ut = humanizeDuration(Math.round(bot.uptime / 1000)*1000);
+		msg.reply('\n\nIf you found a bug or have a nice idea, please contact me or create an issue on GitHub!\n- Mail: setlxbot@wurstkun.com\n- Repository: https://github.com/darkson95/setlXBot\n- ``!commands`` - prints all commands\n- Bot-Uptime: ' + ut + '\n');
 	}
 	else if(cmd.startsWith(prefix + "setlx")){
 		var att = msg.attachments.first();
