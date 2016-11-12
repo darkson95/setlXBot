@@ -4,6 +4,7 @@ var stringArgv = require('string-argv');
 var fs = require('fs');
 var download = require('download');
 var exec = require('child_process').exec;
+var humanizeDuration = require('humanize-duration')
 var setlxPath = "./setlx/setlX --runtimeDebugging ";
 
 bot.login(process.env.BOTTOKEN);
