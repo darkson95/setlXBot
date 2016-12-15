@@ -52,7 +52,12 @@ bot.on("message", msg => {
     					fs.readFile(fileSavePath, 'utf8', function (err, data) {
 						  	if (err) throw err;
 
-							msg.channel.sendCode('setlX', fileName + ' Code:\n\n' + data, {});
+						  	var outputPartsCode = data.match(/[\s\S]{1,1900}/g);
+						  	var parts = Math.ceil(data.length / 1900);
+
+						  	outputPartsCode.forEach((x, i) => {
+						  		msg.channel.sendCode('setlX', fileName + ' Code Part ' + (i+1) + '/' + parts + ':\n\n' + x);
+						  	});
 						});
 					}
 
@@ -61,16 +66,32 @@ bot.on("message", msg => {
 						    var command = setlxPath + fileSavePath;
 				    		exec(command, (error, stdout, stderr) => {
 							  	if (error) {
-							    	msg.reply("Error (exec): " + error);
+								  	var outputPartsError = error.match(/[\s\S]{1,1900}/g);
+								  	var parts = Math.ceil(error.length / 1900);
+
+								  	outputPartsError.forEach((x, i) => {
+								  		msg.channel.sendCode('Error (exec) ' + (i+1) + '/' + parts + ':\n\n' + x);
+								  	});
+
 							    	return;
 							  	}
 
-							  	var output = fileName + ' Result:\n\n' + stdout;
+
+							  	var outputPartsResult = stdout.match(/[\s\S]{1,1900}/g);
+							  	var parts = Math.ceil(stdout.length / 1900);
+							  	outputPartsResult.forEach((x, i) => {
+							  		msg.channel.sendCode(fileName + ' Result ' + (i+1) + '/' + parts + ':\n\n' + x);
+							  	});
+
 							  	if(stderr.length > 3){
-							  		output = output.concat('\n\nstderr:\n' + stderr);
+
+								  	var outputPartsErr = stderr.match(/[\s\S]{1,1900}/g);
+								  	var parts = Math.ceil(stderr.length / 1900);
+								  	outputPartsErr.forEach((x, i) => {
+								  		msg.channel.sendCode('stderr ' + (i+1) + '/' + parts + ':\n\n' + x);
+								  	});
 							  	}
 
-							  	msg.channel.sendCode('', output, {});
 							  	message.delete();
 
 							  	setTimeout(function(){ 
