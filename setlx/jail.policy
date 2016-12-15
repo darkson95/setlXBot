@@ -2,5 +2,6 @@ grant codebase "file:/home/user/setlXBot/setlx/setlX.jar" {
     permission java.lang.RuntimePermission "stopThread";
     permission java.util.PropertyPermission "sun.arch.data.model", "read";
     permission java.lang.RuntimePermission "getenv.SETLX_LIBRARY_PATH";
+    permission java.io.FilePermission "${/}home${/}user${/}setlXBot${/}setlx${/}setlXlibrary${/}-", "read";
     permission java.io.FilePermission "${/}tmp${/}setlx${/}-", "read";
 };
