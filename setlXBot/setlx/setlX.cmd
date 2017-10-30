@@ -7,13 +7,14 @@ REM
 REM
 
 REM insert path to the folder where you copied the jar files here
-set setlXJarDirectory=X:\setlXBot\seltx
+set setlXJarDirectory=C:\Users\Sezer\Documents\visual studio 2015\Projects\setlXBot\setlXBot\setlx\
 
 REM insert full path to library location here
-set SETLX_LIBRARY_PATH=X:\setlXBot\seltx\setlXlibrary\
+set SETLX_LIBRARY_PATH=C:\Users\Sezer\Documents\visual studio 2015\Projects\setlXBot\setlXBot\setlx\setlXlibrary\
 
 REM ########################## additional options ##############################
 set javaParameters=
+REM " -Djava.security.manager -Djava.security.policy=C:\Users\SKaraoglanoglu\Desktop\setlXBot\setlx\jail.policy" 
 
 REM uncomment by removing 'REM' to force execution in 64 bit mode (only recent Java versions for Windows support this)
 REM set javaParameters=%javaParameters% -d64

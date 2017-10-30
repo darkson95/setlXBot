@@ -6,13 +6,13 @@
 #
 
 # insert path to the folder where you copied the jar files here
-setlXJarDirectory="/home/user/setlXBot/setlx"
+setlXJarDirectory="."
 
 # insert full path to library location here
-setlXlibraryPath="/home/user/setlXBot/setlx/setlXlibrary/"
+setlXlibraryPath="$HOME/setlXlibrary/"
 
 ############################## additional options ##############################
-javaParameters=" -Djava.security.manager -Djava.security.policy=/home/user/setlXBot/setlx/jail.policy"
+javaParameters=""
 
 # uncomment to force execution in 64 bit mode
 #javaParameters="$javaParameters -d64"
